@@ -1,0 +1,13 @@
+<package>
+  <name>DspFilters</name>
+  <version>0.0.0</version>
+  <license>MIT</license>
+  <author email="vinnie.falco@gmail.com">Vinnie Falco</author>
+  <maintainer email="jbo@jhu.edu">Jonathan Bohren</maintainer>
+
+  <description>
+    A Collection of Useful C++ Classes for Digital Signal Processing
+  </description>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>  
