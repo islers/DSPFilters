@@ -113,6 +113,7 @@ class DirectFormII
 {
 public:
   DirectFormII ()
+  : m_equilibria(0)
   {
     reset ();
   }
@@ -128,18 +129,24 @@ public:
                    const BiquadBase& s,
                    const double vsa)
   {
-    double w   = in - s.m_a1*m_v1 - s.m_a2*m_v2 + vsa;
+    double w   = (in-m_equilibria) - s.m_a1*m_v1 - s.m_a2*m_v2 + vsa;
     double out =      s.m_b0*w    + s.m_b1*m_v1 + s.m_b2*m_v2;
 
     m_v2 = m_v1;
     m_v1 = w;
-
-    return static_cast<Sample> (out);
+    
+    return static_cast<Sample> (out+m_equilibria);
+  }
+  
+  void setEquilibria(double eq)
+  {
+    m_equilibria = eq;
   }
 
 private:
   double m_v1; // v[-1]
   double m_v2; // v[-2]
+  double m_equilibria; // equilibria point. Default: 0.
 };
 
 //------------------------------------------------------------------------------

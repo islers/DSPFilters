@@ -121,7 +121,10 @@ public:
   void process (int numSamples, Sample* dest, StateType& state) const
   {
     while (--numSamples >= 0)
-      *dest++ = state.process (*dest, *this);
+    {
+      *dest = state.process (*dest, *this);
+      ++dest;
+    }
   }
 
 protected:
@@ -153,6 +156,14 @@ public:
     {
       Cascade::StateBase <StateType>::m_stateArray = m_states;
       reset ();
+    }
+    
+    void setEquilibria( double eq )
+    {
+      for(size_t i = 0; i<MaxStages; ++i)
+      {
+	m_states[i].setEquilibria(eq);
+      }
     }
 
     void reset ()

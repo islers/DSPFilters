@@ -258,6 +258,11 @@ public:
   {
     m_state.process (numSamples, arrayOfChannels, *((FilterClass*)this));
   }
+  
+  ChannelsState <Channels, typename FilterClass::template State <StateType> >& states()
+  {
+    return m_state;
+  }
 
 protected:
   ChannelsState <Channels,
